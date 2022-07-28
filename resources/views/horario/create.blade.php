@@ -18,7 +18,7 @@
                         <span class="card-title">Create Horario</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('horarios.store') }}"  role="form" enctype="multipart/form-data" onsubmit="validar();>
+                        <form method="POST" action="{{ route('horarios.store') }}"  role="form" enctype="multipart/form-data" >
                             @csrf
 
                             @include('horario.form')

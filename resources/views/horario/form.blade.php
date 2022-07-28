@@ -31,9 +31,7 @@
         </div>
 <div class="form-group">
     <table style=" padding-top = 20px">
-        <caption>
-            📅 HORARIO  📅
-        </caption>
+
 
 
         <thead>
@@ -50,7 +48,7 @@
           <tr>
             <td>7:00 - 8:00</td>
             <td>{{Form::checkbox('lunes[]', '7')}}</td>
-            <td>🔓{{Form::checkbox('martes[]', '7')}}</td>
+            <td>{{Form::checkbox('martes[]', '7')}}</td>
             <td>{{Form::checkbox('miercoles[]', '7')}}</td>
             <td>{{Form::checkbox('jueves[]', '7')}}</td>
             <td>{{Form::checkbox('viernes[]', '7')}}</td>

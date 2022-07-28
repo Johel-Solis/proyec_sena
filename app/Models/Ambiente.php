@@ -39,7 +39,7 @@ class Ambiente extends Model
      *
      * @var array
      */
-    protected $fillable = ['codigo','nombre','tipo','capacidad','estado','ubicacion'];
+    protected $fillable = ['codigo','nombre','tipo','capacidad','ubicacion'];
 
 
     /**

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('area');
             $table->enum('tipo_docente',['Técnico','profesional']);
             $table->enum('tipo_contrato', ['PT', 'CNT']);
-            $table->string('estado');
+            $table->string('estado')->default(1);;
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

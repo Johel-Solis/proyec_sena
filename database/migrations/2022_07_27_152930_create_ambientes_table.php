@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->enum('tipo',['Virtual','Presencial']);
             $table->integer('capacidad');
-            $table->integer('estado');
+            $table->integer('estado')->default(1);;
             $table->string('ubicacion');
             $table->timestamps();
         });

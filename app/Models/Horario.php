@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 /**
  * Class Horario
@@ -26,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Horario extends Model
 {
-    
+
     static $rules = [
 		'cantidad_horas' => 'required',
 		'periodo_academico_id' => 'required',
@@ -52,7 +53,7 @@ class Horario extends Model
     {
         return $this->hasOne('App\Models\Ambiente', 'id', 'ambiente_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -60,7 +61,7 @@ class Horario extends Model
     {
         return $this->hasOne('App\Models\Competencia', 'id', 'competencia_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -68,7 +69,7 @@ class Horario extends Model
     {
         return $this->hasMany('App\Models\Dia', 'horario_id', 'id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -76,7 +77,7 @@ class Horario extends Model
     {
         return $this->hasOne('App\Models\Docente', 'id', 'docente_id');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -84,6 +85,63 @@ class Horario extends Model
     {
         return $this->hasOne('App\Models\PeriodoAcademico', 'id', 'periodo_academico_id');
     }
-    
 
+    /*public function validarAmbiente(Request $request)
+    {
+        $horarios = Horario::where('ambiente_id',$request->input('ambiente_id'));
+        foreach ($horario as  $horario) {
+        $dias = Dia::where('horario_id',$horario->id);
+        foreach ($dias as $dia) {
+
+            if(($request -> input('lunes')) != null){
+                foreach ($request -> input('lunes') as $key => $value) {
+                    if($dia->hora == $value && $dia->nombre == 'Lunes'){
+                        return true;
+
+                    }
+                }
+            }
+            if(($request -> input('martes')) != null){
+                foreach ($request -> input('martes') as $key => $value) {
+                    if($dia->hora == $value && $dia->nombre == 'Martes'){
+                        return true;
+                    }
+                }
+            }
+
+            if (($request -> input('miercoles')) != null) {
+                foreach ($request -> input('miercoles') as $key => $value) {
+                    if($dia->hora == $value && $dia->nombre == 'Miercoles'){
+                        return true;
+                    }
+                }
+            }
+            if (($request -> input('jueves')) != null) {
+                foreach ($request -> input('jueves') as $key => $value) {
+                    if($dia->hora == $value && $dia->nombre == 'Jueves'){
+                        return true;
+                    }
+                }
+            }
+            if (($request -> input('viernes')) != null) {
+                foreach ($request -> input('viernes') as $key => $value) {
+                    if($dia->hora == $value  && $dia->nombre == 'Viernes'){
+                        return true;
+                    }
+                }
+            }
+            if (($request -> input('sabado')) != null) {
+                foreach ($request -> input('sabado') as $key => $value) {
+                    if($dia->hora == $value   && $dia->nombre == 'Sabado'){
+                        return true;
+                    }
+                }
+            }
+        }
+        }
+        return false;
+
+     }
+
+    */
 }
