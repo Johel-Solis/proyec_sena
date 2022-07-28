@@ -1,0 +1,15 @@
+caption {
+  padding: 20px;
+  font-size: 28px;
+  color: #0077b6;
+}
+th {
+  background-color: #0096c7;
+  color: #03045e;
+}
+td {
+  background-color: #48cae4;
+  color: #023e8a;
+  padding: 8px;
+  text-align: center;
+}
