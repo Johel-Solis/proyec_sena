@@ -55,11 +55,6 @@ class HorarioController extends Controller
     public function store(Request $request)
     {
         request()->validate(Horario::$rules);
-        $horario =new Horario();
-        if($horario->validarAmbiente($request)){
-            return redirect()->route('horarios.create')
-                ->with('error', 'El ambiente ya se encuentra ocupado en el horario.');
-        }
 
         $horario = Horario::create($request->all());
 

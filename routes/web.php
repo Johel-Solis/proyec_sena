@@ -31,7 +31,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::group(['prefix'=>'admin','middleware'=>['auth','role:admin']],function () {
-
+    Route::get('/admin', function () {
+        return view('home');
+    });
 Route::resource('users', UserController::class);
 Route::resource('periodo-academicos', PeriodoAcademicoController::class);
 Route::resource('ambientes', AmbienteController::class);
@@ -44,9 +46,13 @@ Route::resource('programas', ProgramaController::class);
 
 
 Route::group(['prefix'=>'docente','middleware'=>['auth','role:docente']],function () {
+    //Route::get('/docentes/horario/{id}', [DocenteController::class,'horario']);
+    //Route::resource("docentes", DocenteController::class);
+    });
 
 
-});
+
+
 
 Auth::routes();
 

@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Docente;
 use Illuminate\Http\Request;
-
+use RegisterController;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+use RegistersUsers;
+use Illuminate\Support\Facades\Hash;
+use  App\Model\Horario;
 /**
  * Class DocenteController
  * @package App\Http\Controllers
@@ -43,9 +48,34 @@ class DocenteController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Docente::$rules);
+        //request()->validate(Docente::$rules);
 
-        $docente = Docente::create($request->all());
+
+            $user= User::create([
+                'name' => $request->input('nombre'),
+                'email' => $request->input('email'),
+                'tipo_usuario' => 1,
+                'password' => Hash::make($request->input('password')),
+            ]);
+
+            $user->assignRole('docente');
+
+
+        $docente = new Docente();
+        $docente->nombre = $request->input('nombre');
+        $docente->email = $request->input('email');
+        $docente->id =$request->input('id');
+        $docente->tipo_documento = $request->input('tipo_documento');
+        $docente->tipo_contrato = $request->input('tipo_contrato');
+        $docente->tipo_docente = $request->input('tipo_docente');
+        $docente->area = $request->input('area');
+        $docente->apellido = $request->input('apellido');
+        $docente->user_id =$user->id;
+        $docente->save();
+
+
+
+        //$docente = Docente::create($request->all());
 
         return redirect()->route('docentes.index')
             ->with('success', 'Docente created successfully.');
@@ -105,6 +135,14 @@ class DocenteController extends Controller
 
         return redirect()->route('docentes.index')
             ->with('success', 'Docente deleted successfully');
+    }
+
+    public function horario($id)
+    {
+        $docente = Docente::where('user_id',$id)->get();
+        $horarios = Horario::where('docente_id', $docente->id)->get();
+        $cantidad=0;
+        return view('docente.horario', compact('docente','horarios','cantidad'));
     }
 
 

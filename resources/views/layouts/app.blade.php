@@ -39,6 +39,7 @@
          <div class="collapse navbar-collapse" id="navbarResponsive">
              <ul class="navbar-nav ml-auto">
             @auth
+             @if (\Auth::user()->hasRole('admin'))
                  <li class="nav-item dropdown">
                      <a class="nav-link text-secondary dropdown-toggle menu-option" id="navbarDropdown" role="button"
                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ambiente</a>
@@ -63,6 +64,38 @@
                         <a class="dropdown-item" href="{{ route('horarios.index') }}">Listar</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-secondary dropdown-toggle menu-option" id="navbarDropdown-4" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Docente</a>
+                    <div class="dropdown-menu border-0" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('docentes.create') }}">Adicionar</a>
+                        <a class="dropdown-item" href="{{ route('docentes.index') }}">Listar</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-secondary dropdown-toggle menu-option" id="navbarDropdown-4" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Programa</a>
+                    <div class="dropdown-menu border-0" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('programas.create') }}">Adicionar</a>
+                        <a class="dropdown-item" href="{{ route('programas.index') }}">Listar</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-secondary dropdown-toggle menu-option" id="navbarDropdown-4" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Competencia</a>
+                    <div class="dropdown-menu border-0" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('competencias.create') }}">Adicionar</a>
+                        <a class="dropdown-item" href="{{ route('competencias.index') }}">Listar</a>
+                    </div>
+                </li>
+                @else
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-secondary dropdown-toggle menu-option" id="navbarDropdown-4" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Horario</a>
+                    <div class="dropdown-menu border-0" aria-labelledby="navbarDropdown">
+
+                    </div>
+                @endif
 
             @endauth
              </ul>

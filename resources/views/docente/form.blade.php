@@ -17,13 +17,8 @@
             {!! $errors->first('apellido', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('email') }}
-            {{ Form::text('email', $docente->email, ['class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''), 'placeholder' => 'Email']) }}
-            {!! $errors->first('email', '<div class="invalid-feedback">:message</div>') !!}
-        </div>
-        <div class="form-group">
             {{ Form::label('tipo_documento') }}
-            {{ Form::text('tipo_documento', $docente->tipo_documento, ['class' => 'form-control' . ($errors->has('tipo_documento') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Documento']) }}
+            {{ Form::select('tipo_documento',array('Cedula Extranjeria'=>'Cedula Extranjeria','Visa'=>'Visa','Pasaporte'=>'Pasaporte','Cedula'=>'Cedula'),$docente->tipo_documento, ['class' => 'form-control' . ($errors->has('tipo_documento') ? ' is-invalid' : '')]) }}
             {!! $errors->first('tipo_documento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
@@ -33,24 +28,55 @@
         </div>
         <div class="form-group">
             {{ Form::label('tipo_docente') }}
-            {{ Form::text('tipo_docente', $docente->tipo_docente, ['class' => 'form-control' . ($errors->has('tipo_docente') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Docente']) }}
+            {{ Form::select('tipo_docente',array('Técnico'=>'Técnico','profesional'=>'profesional'), $docente->tipo_docente, ['class' => 'form-control' . ($errors->has('tipo_docente') ? ' is-invalid' : '')]) }}
             {!! $errors->first('tipo_docente', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('tipo_contrato') }}
-            {{ Form::text('tipo_contrato', $docente->tipo_contrato, ['class' => 'form-control' . ($errors->has('tipo_contrato') ? ' is-invalid' : ''), 'placeholder' => 'Tipo Contrato']) }}
+            {{ Form::select('tipo_contrato',array('PT'=>'PT', 'CNT'=>'CNT'), $docente->tipo_contrato, ['class' => 'form-control' . ($errors->has('tipo_contrato') ? ' is-invalid' : '')]) }}
             {!! $errors->first('tipo_contrato', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('estado') }}
-            {{ Form::text('estado', $docente->estado, ['class' => 'form-control' . ($errors->has('estado') ? ' is-invalid' : ''), 'placeholder' => 'Estado']) }}
-            {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
+            <div class="row mb-3">
+                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                <div class="col-md-6">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
         </div>
-        <div class="form-group">
-            {{ Form::label('user_id') }}
-            {{ Form::text('user_id', $docente->user_id, ['class' => 'form-control' . ($errors->has('user_id') ? ' is-invalid' : ''), 'placeholder' => 'User Id']) }}
-            {!! $errors->first('user_id', '<div class="invalid-feedback">:message</div>') !!}
+
+            <div class="row mb-3">
+                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                <div class="col-md-6">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                <div class="col-md-6">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                </div>
+            </div>
         </div>
+
+
+
+
 
     </div>
     <div class="box-footer mt20">

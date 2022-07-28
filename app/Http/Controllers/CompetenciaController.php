@@ -31,8 +31,9 @@ class CompetenciaController extends Controller
      */
     public function create()
     {
+        $programas  = \App\Models\Programa::all()->pluck('nombre', 'id');
         $competencia = new Competencia();
-        return view('competencia.create', compact('competencia'));
+        return view('competencia.create', compact('competencia','programas'));
     }
 
     /**

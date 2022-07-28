@@ -74,6 +74,18 @@ class RegisterController extends Controller
         return $user;
     }
 
+    public function createDoncente(array $data)
+    {
+        $user= User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
+        $user->assignRole('docente');
+        return $user;
+    }
+
     protected function redirectTo ()
     {
         if(\Auth::user()->hasRole('admin')){
