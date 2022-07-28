@@ -55,8 +55,7 @@ class HorarioController extends Controller
     public function store(Request $request)
     {
         request()->validate(Horario::$rules);
-        $horarios = Horario::where('ambiente_id',$request->input('ambiente_id'));
-        $dias = Dia::where('horario_id',$horarios->id);
+
 
 
         $horario = Horario::create($request->all());
@@ -188,61 +187,65 @@ class HorarioController extends Controller
 
     public function validarAmbiente(Request $request)
     {
-        if(($request -> input('lunes')) != null){
-            foreach ($request -> input('lunes') as $key => $value) {
-                $dia = new Dia();
-                $dia->nombre = 'Lunes';
-                $dia->hora = $value;
-                $dia->horario_id = $horario->id;
-                $dia->save();
+        $horarios = Horario::where('ambiente_id',$request->input('ambiente_id'));
+        foreach ($horario as  $horario) {
+        $dias = Dia::where('horario_id',$horario->id);
+        foreach ($dias as $dia) {
+
+            if(($request -> input('lunes')) != null){
+                foreach ($request -> input('lunes') as $key => $value) {
+                    if($dia->hora == $value){
+                        return redirect()->route('horario.create')
+                            ->with('error', 'El horario ya esta ocupado');
+                    }
+                }
+            }
+            if(($request -> input('martes')) != null){
+                foreach ($request -> input('martes') as $key => $value) {
+                    if($dia->hora == $value){
+                        return redirect()->route('horario.create')
+                            ->with('error', 'El horario ya esta ocupado');
+                    }
+                }
+            }
+
+            if (($request -> input('miercoles')) != null) {
+                foreach ($request -> input('miercoles') as $key => $value) {
+                    if($dia->hora == $value){
+                        return redirect()->route('horario.create')
+                            ->with('error', 'El horario ya esta ocupado');
+                    }
+                }
+            }
+            if (($request -> input('jueves')) != null) {
+                foreach ($request -> input('jueves') as $key => $value) {
+                    if($dia->hora == $value){
+                        return redirect()->route('horario.create')
+                            ->with('error', 'El horario ya esta ocupado');
+                    }
+                }
+            }
+            if (($request -> input('viernes')) != null) {
+                foreach ($request -> input('viernes') as $key => $value) {
+                    if($dia->hora == $value){
+                        return redirect()->route('horario.create')
+                            ->with('error', 'El horario ya esta ocupado');
+                    }
+                }
+            }
+            if (($request -> input('sabado')) != null) {
+                foreach ($request -> input('sabado') as $key => $value) {
+                    $dia = new Dia();
+                    $dia->nombre = 'Sabado';
+                    $dia->hora = $value;
+                    $dia->horario_id = $horario->id;
+                    $dia->save();
+                }
             }
         }
-        if(($request -> input('martes')) != null){
-            foreach ($request -> input('martes') as $key => $value) {
-                $dia = new Dia();
-                $dia->nombre = 'Martes';
-                $dia->hora = $value;
-                $dia->horario_id = $horario->id;
-                $dia->save();
-            }
         }
 
-        if (($request -> input('miercoles')) != null) {
-            foreach ($request -> input('miercoles') as $key => $value) {
-                $dia = new Dia();
-                $dia->nombre = 'Miercoles';
-                $dia->hora = $value;
-                $dia->horario_id = $horario->id;
-                $dia->save();
-            }
-        }
-        if (($request -> input('jueves')) != null) {
-            foreach ($request -> input('jueves') as $key => $value) {
-                $dia = new Dia();
-                $dia->nombre = 'Jueves';
-                $dia->hora = $value;
-                $dia->horario_id = $horario->id;
-                $dia->save();
-            }
-        }
-        if (($request -> input('viernes')) != null) {
-            foreach ($request -> input('viernes') as $key => $value) {
-                $dia = new Dia();
-                $dia->nombre = 'Viernes';
-                $dia->hora = $value;
-                $dia->horario_id = $horario->id;
-                $dia->save();
-            }
-        }
-        if (($request -> input('sabado')) != null) {
-            foreach ($request -> input('sabado') as $key => $value) {
-                $dia = new Dia();
-                $dia->nombre = 'Sabado';
-                $dia->hora = $value;
-                $dia->horario_id = $horario->id;
-                $dia->save();
-            }
-        }
+
 
      }
 
